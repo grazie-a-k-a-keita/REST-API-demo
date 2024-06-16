@@ -1,0 +1,20 @@
+{
+  "name": "RestApiDemo",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
+        "[java]": {
+          "editor.defaultFormatter": "redhat.java"
+        }
+      },
+      "extensions": ["esbenp.prettier-vscode", "vscjava.vscode-java-pack", "Pivotal.vscode-boot-dev-pack"]
+    }
+  },
+  "forwardPorts": [5432],
+  "remoteUser": "vscode"
+}

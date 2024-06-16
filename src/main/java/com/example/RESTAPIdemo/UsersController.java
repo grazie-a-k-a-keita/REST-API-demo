@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,13 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.RESTAPIdemo.model.Users;
 
 @RestController
 @RequestMapping("/demo")
-public class DemoRestController {
+public class UsersController {
     @Autowired
-    private UserRepository userRepository;
+    private UsersRepository userRepository;
 
     /**
      * ユーザーリストを全件取得
@@ -25,7 +30,7 @@ public class DemoRestController {
      * @return ユーザーリスト(全ユーザー)
      */
     @GetMapping("/users")
-    public List<User> getAllUser() {
+    public List<Users> getAllUser() {
         return userRepository.findAll();
     }
 
@@ -35,8 +40,11 @@ public class DemoRestController {
      * @return ユーザーリスト(指定した性別のユーザー)
      */
     @GetMapping("/users/{gender}")
-    public List<User> getUsersByGender(@PathVariable String gender) {
-        return userRepository.findByGender(gender);
+    public @ResponseBody ResponseEntity<?> getUsersByGender(@PathVariable String gender) {
+        if (!gender.equals("M") && !gender.equals("F")) {
+            return new ResponseEntity<>("input invalid", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(userRepository.findByGender(gender), HttpStatus.OK);
     }
 
     /**
@@ -46,7 +54,7 @@ public class DemoRestController {
      * @return 登録したユーザー情報
      */
     @PostMapping("/user")
-    public User saveUser(@RequestBody User user) {
+    public Users saveUser(@RequestBody Users user) {
         return userRepository.save(user);
     }
 
@@ -58,7 +66,7 @@ public class DemoRestController {
      * @return 更新したユーザー情報
      */
     @PutMapping("/user/{id}")
-    public User updateUser(@PathVariable int id, @RequestBody User user) {
+    public Users updateUser(@PathVariable int id, @RequestBody Users user) {
         user.setId(id);
         return userRepository.save(user);
     }
@@ -70,7 +78,7 @@ public class DemoRestController {
      */
     @DeleteMapping("/user/{id}")
     public void deleteUser(@PathVariable int id) {
-        Optional<User> user = userRepository.findById(id);
+        Optional<Users> user = userRepository.findById(id);
         if (user.isPresent()) {
             userRepository.deleteById(id);
         }

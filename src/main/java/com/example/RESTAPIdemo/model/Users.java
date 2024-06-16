@@ -1,14 +1,20 @@
-package com.example.RESTAPIdemo;
+package com.example.RESTAPIdemo.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+enum Gender {
+    M, F
+}
+
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
-public class User {
+public class Users {
     /** ID */
     @Id
     private int id;
@@ -20,7 +26,8 @@ public class User {
     private String lastName;
 
     /** 性別 */
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     /** 年齢 */
     private int age;
