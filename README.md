@@ -6,18 +6,20 @@
 
 ### Api List
 
-| Method | Path                   | Note             |
-| ------ | ---------------------- | ---------------- |
-| GET    | /demo/users            | -                |
-| GET    | /demo/users/{ gender } | gender: "M", "F" |
-| POST   | /demo/user             | -                |
-| PUT    | /demo/user/{ id }      | -                |
-| DELETE | /demo/user/{ id }      | -                |
+| Method | Path               | Note |
+| ------ | ------------------ | ---- |
+| GET    | /demo/users        | -    |
+| GET    | /demo/users/{ id } | -    |
+| POST   | /demo/user         | \*1  |
+| PUT    | /demo/user/{ id }  | \*1  |
+| DELETE | /demo/user/{ id }  | -    |
 
 ```json
+// *1: Body
+
 {
-  "firstName": "山田",
-  "lastName": "次郎",
-  "gender": "M"
+  "firstName": "林",
+  "lastName": "かおり",
+  "age": 19
 }
 ```

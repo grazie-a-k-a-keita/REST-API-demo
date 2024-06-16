@@ -1,15 +1,11 @@
-package com.example.RESTAPIdemo.model;
+package com.example.demo.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-
-enum Gender {
-    M, F
-}
 
 @Entity
 @Table(name = "users")
@@ -17,6 +13,7 @@ enum Gender {
 public class Users {
     /** ID */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     /** 性 */
@@ -24,10 +21,6 @@ public class Users {
 
     /** 名 */
     private String lastName;
-
-    /** 性別 */
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
 
     /** 年齢 */
     private int age;

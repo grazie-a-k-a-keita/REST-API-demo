@@ -1,11 +1,10 @@
-package com.example.RESTAPIdemo;
+package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.RESTAPIdemo.model.Users;
+import com.example.demo.model.Users;
+import com.example.demo.repository.UsersRepository;
 
 @RestController
 @RequestMapping("/demo")
@@ -31,20 +30,17 @@ public class UsersController {
      */
     @GetMapping("/users")
     public List<Users> getAllUser() {
-        return userRepository.findAll();
+        return userRepository.findAll(Sort.by("id"));
     }
 
     /**
-     * 指定した性別のユーザーリストを取得
+     * 指定したidのユーザーを取得
      * 
      * @return ユーザーリスト(指定した性別のユーザー)
      */
-    @GetMapping("/users/{gender}")
-    public @ResponseBody ResponseEntity<?> getUsersByGender(@PathVariable String gender) {
-        if (!gender.equals("M") && !gender.equals("F")) {
-            return new ResponseEntity<>("input invalid", HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(userRepository.findByGender(gender), HttpStatus.OK);
+    @GetMapping("/users/{id}")
+    public Optional<Users> getUserById(@PathVariable int id) {
+        return userRepository.findById(id);
     }
 
     /**
