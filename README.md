@@ -14,9 +14,9 @@
 | PUT    | /demo/user/{ id }  | \*1  |
 | DELETE | /demo/user/{ id }  | -    |
 
-```json
-// *1: Body
+#### *1: Body
 
+```json
 {
   "firstName": "林",
   "lastName": "かおり",
