@@ -38,7 +38,7 @@ public class UsersController {
      * 
      * @return ユーザーリスト(指定した性別のユーザー)
      */
-    @GetMapping("/users/{id}")
+    @GetMapping("/user/{id}")
     public Optional<Users> getUserById(@PathVariable int id) {
         return userRepository.findById(id);
     }

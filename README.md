@@ -6,15 +6,15 @@
 
 ### Api List
 
-| Method | Path               | Note |
-| ------ | ------------------ | ---- |
-| GET    | /demo/users        | -    |
-| GET    | /demo/users/{ id } | -    |
-| POST   | /demo/user         | \*1  |
-| PUT    | /demo/user/{ id }  | \*1  |
-| DELETE | /demo/user/{ id }  | -    |
+| Method | Path              | Note |
+| ------ | ----------------- | ---- |
+| GET    | /demo/users       | -    |
+| GET    | /demo/user/{ id } | -    |
+| POST   | /demo/user        | \*1  |
+| PUT    | /demo/user/{ id } | \*1  |
+| DELETE | /demo/user/{ id } | -    |
 
-#### *1: Body
+#### \*1: Body
 
 ```json
 {
